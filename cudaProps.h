@@ -37,7 +37,7 @@ class CudaGetProps
   public:
     /* ====================  LIFECYCLE     ======================================= */
     CudaGetProps();     /* constructor */
-//    CudaGetProps( int, cudaDeviceProp );        /* constructor */
+    ~CudaGetProps();    /* destructor */
 
     /* ====================  ACCESSORS     ======================================= */
     /* Gets the number of CUDA enabled devices on the machine */

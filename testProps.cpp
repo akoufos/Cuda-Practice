@@ -31,10 +31,30 @@ using namespace std;
  */
 int main ( int argc, char *argv[] )
 {
+ /* int dev_count;
+  * cudaGetDeviceCount( &dev_count );
+  * cudaDeviceProp dev_prop;
+  * 
+  * for ( int i=0; i < dev_count; i++ )
+  * {
+  *   cudaGetDeviceProperties( &dev_prop, i);
+  *   cout << "Device Name: " << dev_prop.name << endl;
+  *   cout << "Threads/Block: " << dev_prop.maxThreadsPerBlock << endl;
+  *   cout << "SHM/Block: " << dev_prop.sharedMemPerBlock << endl;
+  * }
+  */
+
   int device = 0;
+
   CudaGetProps cudaDevs;
 
   cudaDevs.displayNumDevices();
+
+  for ( int i; i < cudaDevs.getNumDevices(); i++ )
+  {
+    cout << i << ": " << cudaDevs.getDeviceName(i) << endl;
+  }
+  cout << endl;
   
   do
   {

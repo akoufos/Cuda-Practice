@@ -18,6 +18,7 @@
 
 #include <iostream>
 #include <string>
+#include <stdlib.h>
 #include "cudaProps.h"
 
 using namespace std;
@@ -26,25 +27,19 @@ using namespace std;
 CudaGetProps::CudaGetProps()
 {
   cudaGetDeviceCount( &dev_count);
-  cudaDeviceProp props;
+  //dev_props = new cudaDeviceProp[dev_count];
+  dev_props = (cudaDeviceProp*) malloc(dev_count*sizeof(cudaDeviceProp));
   
   for ( int i = 0; i < dev_count; i++ )
   {
-    cudaGetDeviceProperties( &props, i );
+    cudaGetDeviceProperties( dev_props, i );
   }
 } /* End default constructor */
 
-/* // Default constructor for getting CUDA enabled devices
- * CudaGetProps::CudaGetProps( int count, cudaDeviceProps props)
- * {
- *   cudaGetDeviceCount( &count);
- *   
- *   for ( int i = 0; i < count; i++ )
- *   {
- *     cudaGetDeviceProperties( &props, i );
- *   }
- * } // End default constructor
- */
+CudaGetProps::~CudaGetProps()
+{
+  free(dev_props);
+}
 
 int CudaGetProps::getNumDevices()
 {
